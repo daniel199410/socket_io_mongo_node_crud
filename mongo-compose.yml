@@ -1,0 +1,23 @@
+services:
+  mongodb:
+    container_name: mongoFresh
+    image: mongo:5.0.7
+    restart: always
+    environment:
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /data/logs
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_USER}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_PASSWORD}"
+      MONGO_INITDB_DATABASE: websocketdb
+    volumes:
+      - type: volume
+        source: mongo_data
+        target: /data/db
+    command: mongod --auth --port 27017
+    ports:
+      - '27017:27017'
+    env_file:
+      - .env
+
+volumes:
+  mongo_data:
