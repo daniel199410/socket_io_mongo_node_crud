@@ -6,8 +6,12 @@
   <title>Socket crud</title>
 </head>
 <body>
-  <h1>Hola mundo</h1>
+    <form id="note-form">
+        <label for="title"></label><input id="title" type="text"/>
+        <label for="description"></label><textarea id="description" cols="30" rows="10"></textarea>
+        <button>Send</button>
+    </form>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="./main.js"></script>
+    <script src="./main.js" type="module"></script>
 </body>
 </html>
