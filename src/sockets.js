@@ -7,12 +7,16 @@ export default io => {
             io.emit('server:loadNotes', notes);
         }
         emitNotes().then();
+
         socket.on('client:saveNote', async data => {
             const note = new Note({title: data.title, description: data.description});
             const savedNote = await note.save();
-            socket.emit('server:newNote', savedNote);
+            io.emit('server:newNote', savedNote);
+        })
+
+        socket.on('client:deleteNote', async id => {
+            await Note.findByIdAndDelete(id);
+            io.emit('server:noteDeleted', id);
         })
     });
-
-
 }
