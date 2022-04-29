@@ -1,8 +1,9 @@
 const socket = io()
-export const loadNotes = () => {
-    socket.on('loadNotes', data => console.log(data))
-}
+
+export const loadNotes = callback => socket.on('server:loadNotes', callback)
+
+export const onNewNote = callback => socket.on('server:newNote', callback)
 
 export const saveNote = (title, description) => {
-    socket.emit('saveNote', {title, description})
+    socket.emit('client:saveNote', {title, description})
 };
